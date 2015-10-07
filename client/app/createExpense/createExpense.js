@@ -11,6 +11,18 @@
     var creatorId = $window.localStorage.getItem('userId');
     var creatorUsername = $window.localStorage.getItem('username');
 
+    //Currencies
+    $scope.currencyModel = [];
+    $scope.currencyData = [{id: 1, label: 'Euro'}, {id: 2, label: 'Thai Baht'}, {id: 3, label: 'Vietnamese Dong'}];
+    $scope.currDropdownSettings = {
+      showCheckAll: false,
+      showUncheckAll: false,
+      selectionLimit: 1,
+      closeOnSelect: true,
+      smartButtonMaxItems: 1
+    };
+
+
     // Participants is mapped to format it in a way that the dropdown menu can understand.
     $scope.participants = participants.map(function(participant) {
       return { id: participant.id, label: participant.username };
