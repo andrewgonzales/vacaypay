@@ -1,6 +1,6 @@
 describe('AuthController', function () {
   var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
-
+  var User = require('../../server/users/userModel');
   // using angular mocks, we can inject the injector
   // to retrieve our dependencies
   beforeEach(module('app'));
@@ -27,12 +27,20 @@ describe('AuthController', function () {
     };
 
     createController();
-  }));
+
+    //create fake user
+    new User({
+          'username': 'Phillip',
+          'password': 'Phillip'
+      }).save(function() {
+        done();
+      });
+    }));
 
   afterEach(function () {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-    $window.localStorage.removeItem('com.vacapay');
+    $window.localStorage.removeItem('com.vacaypay');
   });
 
   it('should have a signup method', function () {
@@ -43,7 +51,7 @@ describe('AuthController', function () {
     // create a fake JWT for auth
     var token = 'sjj232hwjhr3urw90rof';
 
-    // make a 'fake' reques to the server, not really going to our server
+    // make a 'fake' request to the server, not really going to our server
     $httpBackend.expectPOST('/users/signup').respond({token: token});
     $scope.signup();
     $httpBackend.flush();
@@ -61,5 +69,15 @@ describe('AuthController', function () {
     $scope.signin();
     $httpBackend.flush();
     expect($window.localStorage.getItem('com.vacaypay')).to.be(token);
+  });
+
+  it('should display an error when signin fails', function () {
+    var token = 'sjj232hwjhr3urw90rof';
+    $httpBackend.expectPOST('/users/signin').respond({token: 'blah'});
+    $scope.signin();
+    $httpBackend.flush();
+    expect($window.localStorage.getItem('com.vacaypay')).to.be(token);
+
+    expect($scope.signinFail).to.be.true;
   });
 });

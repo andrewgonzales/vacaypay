@@ -26,7 +26,8 @@ module.exports = function(grunt) {
             'client/app/services/authFactory.js',
             'client/app/services/expenseFactory.js',
             'client/app/services/tripFactory.js',
-            'client/app/services/pastTripFactory.js'
+            'client/app/services/pastTripFactory.js',
+            'client/app/services/currencyFactory.js'
           ],
           dest: 'client/dist/client.js'
         },
@@ -67,7 +68,18 @@ module.exports = function(grunt) {
         dev: {
           script: 'server/app.js'
         }
-      }
+      },
+
+      mochaTest: {
+        test: {
+          options: {
+            reporter: 'nyan'
+          },
+          // src: ['test/server/**/*.js']
+          src: ['test/client/userAuthSpec.js']
+          
+        }
+      },
     });
 
     grunt.loadNpmTasks('grunt-nodemon');
@@ -75,6 +87,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-mocha-test');
     
     grunt.registerTask('build', [
       'concat',
@@ -86,8 +99,12 @@ module.exports = function(grunt) {
       'build'
     ]);
 
+    grunt.registerTask('test', [
+      'mochaTest'
+    ]);
+
     grunt.registerTask('default', [
       'build',
       'nodemon'
     ]);
-};
+  };
