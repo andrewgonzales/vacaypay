@@ -58,7 +58,7 @@
             });
             
             //Expense String:
-            $scope.expense.expenseString = $scope.expense.amount + " " +$scope.currencyData[$scope.currencyModel.id-1].label;
+            $scope.expense.expenseString =$scope.symbol + $scope.expense.amount + " " +$scope.currencyData[$scope.currencyModel.id-1].label;
             //Conversion
             $scope.expense.amount = $scope.expense.amount*exchangeRateobj.rate;
 
