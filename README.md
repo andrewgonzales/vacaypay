@@ -15,10 +15,10 @@ It makes the hassle of sorting out who owes what at the end of a long trip simpl
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
-3. [Development](#development)
-    a. [Installing Dependencies](#installing-dependencies)
-    b. [Tasks](#tasks)
+1. [Requirements](#requirements)
+1. [Development](#development)
+    1. [Installing Dependencies](#installing-dependencies)
+    1. [Tasks](#tasks)
 1. [Team](#team)
 1. [Contributing](#contributing)
 
